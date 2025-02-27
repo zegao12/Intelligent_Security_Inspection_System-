@@ -23,6 +23,7 @@ const constantRouterComponents = {
   StepForm: () => import('@/views/form/stepForm/StepForm'),
   AISetting: () => import('@/views/form/ownviews/aisetting/AiSetting.vue'),
   AdvanceForm: () => import('@/views/form/advancedForm/AdvancedForm'),
+  LevelDefine: () => import('@/views/form/leveldefine/LevelDefine.vue'),
 
   // list
   TableList: () => import('@/views/list/TableList'),

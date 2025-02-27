@@ -6,9 +6,9 @@
     </template>
     <a-card :bordered="false">
       <a-steps class="steps" :current="currentTab">
-        <a-step title="填写转账信息" />
-        <a-step title="确认转账信息" />
-        <a-step title="完成" />
+        <a-step title="填写模型信息" />
+        <a-step title="设置模型参数信息" />
+        <a-step title="升级部署完成" />
       </a-steps>
       <div class="content">
         <step1 v-if="currentTab === 0" @nextStep="nextStep"/>
