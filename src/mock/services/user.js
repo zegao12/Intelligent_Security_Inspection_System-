@@ -551,6 +551,15 @@ const userNav = options => {
       component: 'StepForm'
     },
     {
+      name: 'MUAD',
+      parentId: 10,
+      id: 88,
+      meta: {
+        title: '模型升级部署'
+      },
+      component: 'AISetting'
+    },
+    {
       name: 'advanced-form',
       parentId: 10,
       id: 4,
