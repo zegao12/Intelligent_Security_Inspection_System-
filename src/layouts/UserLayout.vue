@@ -9,8 +9,7 @@
         <div class="top">
           <div class="header">
             <a href="/">
-              <img src="~@/assets/logo.svg" class="logo" alt="logo">
-              <span class="title">Ant Design</span>
+              <span class="title">基于无源太赫兹成像与深度学习技术的智能安检系统</span>
             </a>
           </div>
           <div class="desc">

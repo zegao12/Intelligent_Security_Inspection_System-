@@ -21,7 +21,7 @@
               :placeholder="$t('user.login.username.placeholder')"
               v-decorator="[
                 'username',
-                {rules: [{ required: true, message: $t('user.userName.required') }, { validator: handleUsernameOrEmail }], validateTrigger: 'change'}
+                { rules: [{ required: true, message: $t('user.userName.required') }, { validator: handleUsernameOrEmail }], validateTrigger: 'change' }
               ]"
             >
               <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }"/>
@@ -34,32 +34,36 @@
               :placeholder="$t('user.login.password.placeholder')"
               v-decorator="[
                 'password',
-                {rules: [{ required: true, message: $t('user.password.required') }], validateTrigger: 'blur'}
+                { rules: [{ required: true, message: $t('user.password.required') }], validateTrigger: 'blur' }
               ]"
             >
               <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }"/>
             </a-input-password>
           </a-form-item>
         </a-tab-pane>
+
         <a-tab-pane key="tab2" :tab="$t('user.login.tab-login-mobile')">
           <a-form-item>
-            <a-input size="large" type="text" :placeholder="$t('user.login.mobile.placeholder')" v-decorator="['mobile', {rules: [{ required: true, pattern: /^1[34578]\d{9}$/, message: $t('user.login.mobile.placeholder') }], validateTrigger: 'change'}]">
+            <a-input
+              size="large"
+              type="text"
+              :placeholder="$t('user.login.mobile.placeholder')"
+              v-decorator="['mobile', { rules: [{ required: true, pattern: /^1[34578]\d{9}$/, message: $t('user.login.mobile.placeholder') }], validateTrigger: 'change' }]">
               <a-icon slot="prefix" type="mobile" :style="{ color: 'rgba(0,0,0,.25)' }"/>
             </a-input>
           </a-form-item>
 
           <a-row :gutter="16">
-            <a-col class="gutter-row" :span="16">
+            <a-col :span="16">
               <a-form-item>
-                <a-input size="large" type="text" :placeholder="$t('user.login.mobile.verification-code.placeholder')" v-decorator="['captcha', {rules: [{ required: true, message: $t('user.verification-code.required') }], validateTrigger: 'blur'}]">
+                <a-input size="large" type="text" :placeholder="$t('user.login.mobile.verification-code.placeholder')" v-decorator="['captcha', { rules: [{ required: true, message: $t('user.verification-code.required') }], validateTrigger: 'blur' }]">
                   <a-icon slot="prefix" type="mail" :style="{ color: 'rgba(0,0,0,.25)' }"/>
                 </a-input>
               </a-form-item>
             </a-col>
-            <a-col class="gutter-row" :span="8">
+            <a-col :span="8">
               <a-button
                 class="getCaptcha"
-                tabindex="-1"
                 :disabled="state.smsSendBtn"
                 @click.stop.prevent="getCaptcha"
                 v-text="!state.smsSendBtn && $t('user.register.get-verification-code') || (state.time+' s')"
@@ -71,11 +75,7 @@
 
       <a-form-item>
         <a-checkbox v-decorator="['rememberMe', { valuePropName: 'checked' }]">{{ $t('user.login.remember-me') }}</a-checkbox>
-        <router-link
-          :to="{ name: 'recover', params: { user: 'aaa'} }"
-          class="forge-password"
-          style="float: right;"
-        >{{ $t('user.login.forgot-password') }}</router-link>
+        <router-link class="forge-password" style="float: right;" :to="{ name: 'recover' }">{{ $t('user.login.forgot-password') }}</router-link>
       </a-form-item>
 
       <a-form-item style="margin-top:24px">
@@ -91,15 +91,9 @@
 
       <div class="user-login-other">
         <span>{{ $t('user.login.sign-in-with') }}</span>
-        <a>
-          <a-icon class="item-icon" type="alipay-circle"></a-icon>
-        </a>
-        <a>
-          <a-icon class="item-icon" type="taobao-circle"></a-icon>
-        </a>
-        <a>
-          <a-icon class="item-icon" type="weibo-circle"></a-icon>
-        </a>
+        <a><a-icon class="item-icon" type="alipay-circle"></a-icon></a>
+        <a><a-icon class="item-icon" type="taobao-circle"></a-icon></a>
+        <a><a-icon class="item-icon" type="weibo-circle"></a-icon></a>
         <router-link class="register" :to="{ name: 'register' }">{{ $t('user.login.signup') }}</router-link>
       </div>
     </a-form>
@@ -117,7 +111,6 @@
 import md5 from 'md5'
 import TwoStepCaptcha from '@/components/tools/TwoStepCaptcha'
 import { mapActions } from 'vuex'
-import { timeFix } from '@/utils/util'
 import { getSmsCaptcha, get2step } from '@/api/login'
 
 export default {
@@ -128,8 +121,6 @@ export default {
     return {
       customActiveKey: 'tab1',
       loginBtn: false,
-      // login type: 0 email, 1 username, 2 telephone
-      loginType: 0,
       isLoginError: false,
       requiredTwoStepCaptcha: false,
       stepCaptchaVisible: false,
@@ -137,47 +128,37 @@ export default {
       state: {
         time: 60,
         loginBtn: false,
-        // login type: 0 email, 1 username, 2 telephone
-        loginType: 0,
         smsSendBtn: false
       }
     }
   },
   created () {
-    get2step({ })
+    get2step({})
       .then(res => {
         this.requiredTwoStepCaptcha = res.result.stepCode
       })
       .catch(() => {
         this.requiredTwoStepCaptcha = false
       })
-    // this.requiredTwoStepCaptcha = true
   },
   methods: {
     ...mapActions(['Login', 'Logout']),
-    // handler
     handleUsernameOrEmail (rule, value, callback) {
-      const { state } = this
       const regex = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/
       if (regex.test(value)) {
-        state.loginType = 0
+        this.state.loginType = 0
       } else {
-        state.loginType = 1
+        this.state.loginType = 1
       }
       callback()
     },
     handleTabClick (key) {
       this.customActiveKey = key
-      // this.form.resetFields()
     },
     handleSubmit (e) {
       e.preventDefault()
-      const {
-        form: { validateFields },
-        state,
-        customActiveKey,
-        Login
-      } = this
+      const { validateFields } = this.form
+      const { state, customActiveKey } = this
 
       state.loginBtn = true
 
@@ -190,8 +171,8 @@ export default {
           delete loginParams.username
           loginParams[!state.loginType ? 'email' : 'username'] = values.username
           loginParams.password = md5(values.password)
-          Login(loginParams)
-            .then((res) => this.loginSuccess(res))
+          this.Login(loginParams)
+            .then(res => this.loginSuccess(res))
             .catch(err => this.requestFailed(err))
             .finally(() => {
               state.loginBtn = false
@@ -205,7 +186,8 @@ export default {
     },
     getCaptcha (e) {
       e.preventDefault()
-      const { form: { validateFields }, state } = this
+      const { validateFields } = this.form
+      const { state } = this
 
       validateFields(['mobile'], { force: true }, (err, values) => {
         if (!err) {
@@ -220,20 +202,22 @@ export default {
           }, 1000)
 
           const hide = this.$message.loading('验证码发送中..', 0)
-          getSmsCaptcha({ mobile: values.mobile }).then(res => {
-            setTimeout(hide, 2500)
-            this.$notification['success']({
-              message: '提示',
-              description: '验证码获取成功，您的验证码为：' + res.result.captcha,
-              duration: 8
+          getSmsCaptcha({ mobile: values.mobile })
+            .then(res => {
+              setTimeout(hide, 2500)
+              this.$notification.success({
+                message: '提示',
+                description: '验证码获取成功，您的验证码为：' + res.result.captcha,
+                duration: 8
+              })
             })
-          }).catch(err => {
-            setTimeout(hide, 1)
-            clearInterval(interval)
-            state.time = 60
-            state.smsSendBtn = false
-            this.requestFailed(err)
-          })
+            .catch(err => {
+              setTimeout(hide, 1)
+              clearInterval(interval)
+              state.time = 60
+              state.smsSendBtn = false
+              this.requestFailed(err)
+            })
         }
       })
     },
@@ -247,31 +231,18 @@ export default {
       })
     },
     loginSuccess (res) {
-      console.log(res)
-      // check res.homePage define, set $router.push name res.homePage
-      // Why not enter onComplete
-      /*
-      this.$router.push({ name: 'analysis' }, () => {
-        console.log('onComplete')
-        this.$notification.success({
-          message: '欢迎',
-          description: `${timeFix()}，欢迎回来`
-        })
-      })
-      */
       this.$router.push({ path: '/' })
-      // 延迟 1 秒显示欢迎信息
       setTimeout(() => {
         this.$notification.success({
           message: '欢迎',
-          description: `${timeFix()}，欢迎回来`
+          description: `欢迎回来`
         })
       }, 1000)
       this.isLoginError = false
     },
     requestFailed (err) {
       this.isLoginError = true
-      this.$notification['error']({
+      this.$notification.error({
         message: '错误',
         description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',
         duration: 4
@@ -291,10 +262,13 @@ export default {
     display: block;
     width: 100%;
     height: 40px;
+    background-color: #1890ff;
+    color: white;
   }
 
   .forge-password {
     font-size: 14px;
+    color: #1890ff;
   }
 
   button.login-button {
@@ -302,6 +276,8 @@ export default {
     font-size: 16px;
     height: 40px;
     width: 100%;
+    background-color: #1890ff;
+    border-radius: 5px;
   }
 
   .user-login-other {
@@ -316,7 +292,6 @@ export default {
       vertical-align: middle;
       cursor: pointer;
       transition: color 0.3s;
-
       &:hover {
         color: #1890ff;
       }
@@ -324,7 +299,9 @@ export default {
 
     .register {
       float: right;
+      color: #1890ff;
     }
   }
 }
+
 </style>
