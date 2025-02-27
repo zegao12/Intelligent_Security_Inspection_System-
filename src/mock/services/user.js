@@ -527,29 +527,29 @@ const userNav = options => {
       id: 10,
       meta: {
         icon: 'form',
-        title: '表单页'
+        title: 'ai设置'
       },
       redirect: '/form/base-form',
       component: 'RouteView'
     },
-    {
-      name: 'basic-form',
-      parentId: 10,
-      id: 6,
-      meta: {
-        title: '基础表单'
-      },
-      component: 'BasicForm'
-    },
-    {
-      name: 'step-form',
-      parentId: 10,
-      id: 5,
-      meta: {
-        title: '分步表单'
-      },
-      component: 'StepForm'
-    },
+    // {
+    //   name: 'basic-form',
+    //   parentId: 10,
+    //   id: 6,
+    //   meta: {
+    //     title: '基础表单'
+    //   },
+    //   component: 'BasicForm'
+    // },
+    // {
+    //   name: 'step-form',
+    //   parentId: 10,
+    //   id: 5,
+    //   meta: {
+    //     title: '分步表单'
+    //   },
+    //   component: 'StepForm'
+    // },
     {
       name: 'MUAD',
       parentId: 10,
@@ -559,14 +559,23 @@ const userNav = options => {
       },
       component: 'AISetting'
     },
+    // {
+    //   name: 'advanced-form',
+    //   parentId: 10,
+    //   id: 4,
+    //   meta: {
+    //     title: '高级表单'
+    //   },
+    //   component: 'AdvanceForm'
+    // },
     {
-      name: 'advanced-form',
+      name: 'level-define',
       parentId: 10,
-      id: 4,
+      id: 888,
       meta: {
-        title: '高级表单'
+        title: '危险等级自定义'
       },
-      component: 'AdvanceForm'
+      component: 'LevelDefine'
     },
 
     // list

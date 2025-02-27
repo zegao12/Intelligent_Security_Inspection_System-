@@ -45,13 +45,13 @@
         :wrapperCol="wrapperCol"
         class="stepFormText"
       >
-      <a-input-number
-        style="width: 25%;"
-        v-decorator="['filterThreshold', { initialValue: 25, rules: [{ required: true, message: '请输入过滤阈值' }, { type: 'number', min: 0, max: 100, message: '阈值范围在0到100之间' }] }]"
-        :min="0"
-        :max="100"
-        :step="1"
-      />
+        <a-input-number
+          style="width: 25%;"
+          v-decorator="['filterThreshold', { initialValue: 25, rules: [{ required: true, message: '请输入过滤阈值' }, { type: 'number', min: 0, max: 100, message: '阈值范围在0到100之间' }] }]"
+          :min="0"
+          :max="100"
+          :step="1"
+        />
         <span style="margin-left: 5px;">%</span>
       </a-form-item>
       <a-form-item :wrapperCol="{span: 19, offset: 5}">
