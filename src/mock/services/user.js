@@ -632,18 +632,6 @@ const userNav = options => {
       },
       component: 'LevelDefine'
     },
-    {
-      name: 'list',
-      parentId: 0,
-      id: 10004,
-      meta: {
-        icon: 'table',
-        title: '列表页',
-        show: true
-      },
-      redirect: '/list/table-list',
-      component: 'RouteView'
-    },
     // list
     {
       name: 'list',
@@ -667,6 +655,17 @@ const userNav = options => {
         show: true
       },
       component: 'TableList'
+    },
+    {
+      name: 'security-log',
+      parentId: 10010,
+      id: 8888,
+      path: '/list/table-list/:pageNo([1-9]\\d*)?',
+      meta: {
+        title: '危险物品检测日志',
+        show: true
+      },
+      component: 'SecurityLog'
     },
     {
       name: 'basic-list',
