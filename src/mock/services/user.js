@@ -475,13 +475,57 @@ const info = options => {
 const userNav = options => {
   const nav = [
     // dashboard
+    // {
+    //   name: 'dashboard',
+    //   parentId: 0,
+    //   id: 1,
+    //   meta: {
+    //     icon: 'dashboard',
+    //     title: '仪表盘',
+    //     show: true
+    //   },
+    //   component: 'RouteView',
+    //   redirect: '/dashboard/workplace'
+    // },
+    // {
+    //   name: 'workplace',
+    //   parentId: 1,
+    //   id: 7,
+    //   meta: {
+    //     title: '工作台',
+    //     show: true
+    //   },
+    //   component: 'Workplace'
+    // },
+    // {
+    //   name: 'monitor',
+    //   path: 'https://www.baidu.com/',
+    //   parentId: 1,
+    //   id: 3,
+    //   meta: {
+    //     title: '监控页（外部）',
+    //     target: '_blank',
+    //     show: true
+    //   }
+    // },
+    // {
+    //   name: 'Analysis',
+    //   parentId: 1,
+    //   id: 2,
+    //   meta: {
+    //     title: '分析页',
+    //     show: true
+    //   },
+    //   component: 'Analysis',
+    //   path: '/dashboard/analysis'
+    // },
     {
       name: 'dashboard',
       parentId: 0,
-      id: 1,
+      id: 10002,
       meta: {
         icon: 'dashboard',
-        title: '仪表盘',
+        title: '安检作业',
         show: true
       },
       component: 'RouteView',
@@ -489,8 +533,8 @@ const userNav = options => {
     },
     {
       name: 'workplace',
-      parentId: 1,
-      id: 7,
+      parentId: 10002,
+      id: 30001,
       meta: {
         title: '工作台',
         show: true
@@ -498,36 +542,47 @@ const userNav = options => {
       component: 'Workplace'
     },
     {
-      name: 'monitor',
-      path: 'https://www.baidu.com/',
-      parentId: 1,
-      id: 3,
+      name: 'CurrentSecurity',
+      parentId: 10002,
+      id: 30002,
       meta: {
-        title: '监控页（外部）',
-        target: '_blank',
-        show: true
-      }
-    },
-    {
-      name: 'Analysis',
-      parentId: 1,
-      id: 2,
-      meta: {
-        title: '分析页',
+        title: '实时安检',
         show: true
       },
-      component: 'Analysis',
-      path: '/dashboard/analysis'
+      component: 'CurrentSecurity',
+      path: '/dashboard/CurrentSecurity'
     },
-
+    {
+      name: 'VisualAnalysis',
+      parentId: 0,
+      id: 10001,
+      meta: {
+        icon: 'dashboard',
+        title: '可视化分析',
+        show: true
+      },
+      component: 'RouteView',
+      redirect: '/dashboard/workplace'
+    },
+    {
+      name: 'VisualAnalysis',
+      parentId: 10001,
+      id: 20001,
+      meta: {
+        title: '安检数据可视化分析',
+        show: true
+      },
+      component: 'SecurityDataAnalysis',
+      path: '/VisualAnalysis/SecurityDataAnalysis'
+    },
     // form
     {
-      name: 'form',
+      name: 'AISetting',
       parentId: 0,
       id: 10,
       meta: {
         icon: 'form',
-        title: 'ai设置'
+        title: 'AI设置'
       },
       redirect: '/form/base-form',
       component: 'RouteView'
@@ -577,7 +632,18 @@ const userNav = options => {
       },
       component: 'LevelDefine'
     },
-
+    {
+      name: 'list',
+      parentId: 0,
+      id: 10004,
+      meta: {
+        icon: 'table',
+        title: '列表页',
+        show: true
+      },
+      redirect: '/list/table-list',
+      component: 'RouteView'
+    },
     // list
     {
       name: 'list',
@@ -585,65 +651,54 @@ const userNav = options => {
       id: 10010,
       meta: {
         icon: 'table',
-        title: '日志记录',
+        title: '列表页',
         show: true
       },
       redirect: '/list/table-list',
       component: 'RouteView'
     },
-    // {
-    //   name: 'table-list',
-    //   parentId: 10010,
-    //   id: 10011,
-    //   path: '/list/table-list/:pageNo([1-9]\\d*)?',
-    //   meta: {
-    //     title: '查询表格',
-    //     show: true
-    //   },
-    //   component: 'TableList'
-    // },
     {
-      name: 'security-log',
+      name: 'table-list',
       parentId: 10010,
-      id: 8888,
+      id: 10011,
       path: '/list/table-list/:pageNo([1-9]\\d*)?',
       meta: {
-        title: '危险物品检测日志',
+        title: '查询表格',
         show: true
       },
-      component: 'SecurityLog'
+      component: 'TableList'
     },
-    // {
-    //   name: 'basic-list',
-    //   parentId: 10010,
-    //   id: 10012,
-    //   meta: {
-    //     title: '标准列表',
-    //     show: true
-    //   },
-    //   component: 'StandardList'
-    // },
-    // {
-    //   name: 'card',
-    //   parentId: 10010,
-    //   id: 10013,
-    //   meta: {
-    //     title: '卡片列表',
-    //     show: true
-    //   },
-    //   component: 'CardList'
-    // },
-    // {
-    //   name: 'search',
-    //   parentId: 10010,
-    //   id: 10014,
-    //   meta: {
-    //     title: '搜索列表',
-    //     show: true
-    //   },
-    //   redirect: '/list/search/article',
-    //   component: 'SearchLayout'
-    // },
+    {
+      name: 'basic-list',
+      parentId: 10010,
+      id: 10012,
+      meta: {
+        title: '标准列表',
+        show: true
+      },
+      component: 'StandardList'
+    },
+    {
+      name: 'card',
+      parentId: 10010,
+      id: 10013,
+      meta: {
+        title: '卡片列表',
+        show: true
+      },
+      component: 'CardList'
+    },
+    {
+      name: 'search',
+      parentId: 10010,
+      id: 10014,
+      meta: {
+        title: '搜索列表',
+        show: true
+      },
+      redirect: '/list/search/article',
+      component: 'SearchLayout'
+    },
     {
       name: 'article',
       parentId: 10014,
