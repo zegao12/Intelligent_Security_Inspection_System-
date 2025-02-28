@@ -660,12 +660,23 @@ const userNav = options => {
       name: 'security-log',
       parentId: 10010,
       id: 8888,
-      path: '/list/table-list/:pageNo([1-9]\\d*)?',
+      path: '/log/security-log',
       meta: {
         title: '危险物品检测日志',
         show: true
       },
       component: 'SecurityLog'
+    },
+    {
+      name: 'ConfidentialityLog',
+      parentId: 10010,
+      id: 8889,
+      path: '/log/ConfidentialityLog',
+      meta: {
+        title: '可疑物品检测日志',
+        show: true
+      },
+      component: 'ConfidentialityLog'
     },
     // {
     //   name: 'basic-list',
@@ -730,118 +741,118 @@ const userNav = options => {
     // },
 
     // profile
-    {
-      name: 'profile',
-      parentId: 0,
-      id: 10018,
-      meta: {
-        title: '详情页',
-        icon: 'profile',
-        show: true
-      },
-      redirect: '/profile/basic',
-      component: 'RouteView'
-    },
-    {
-      name: 'basic',
-      parentId: 10018,
-      id: 10019,
-      meta: {
-        title: '基础详情页',
-        show: true
-      },
-      component: 'ProfileBasic'
-    },
-    {
-      name: 'advanced',
-      parentId: 10018,
-      id: 10020,
-      meta: {
-        title: '高级详情页',
-        show: true
-      },
-      component: 'ProfileAdvanced'
-    },
+    // {
+    //   name: 'profile',
+    //   parentId: 0,
+    //   id: 10018,
+    //   meta: {
+    //     title: '详情页',
+    //     icon: 'profile',
+    //     show: true
+    //   },
+    //   redirect: '/profile/basic',
+    //   component: 'RouteView'
+    // },
+    // {
+    //   name: 'basic',
+    //   parentId: 10018,
+    //   id: 10019,
+    //   meta: {
+    //     title: '基础详情页',
+    //     show: true
+    //   },
+    //   component: 'ProfileBasic'
+    // },
+    // {
+    //   name: 'advanced',
+    //   parentId: 10018,
+    //   id: 10020,
+    //   meta: {
+    //     title: '高级详情页',
+    //     show: true
+    //   },
+    //   component: 'ProfileAdvanced'
+    // },
 
-    // result
-    {
-      name: 'result',
-      parentId: 0,
-      id: 10021,
-      meta: {
-        title: '结果页',
-        icon: 'check-circle-o',
-        show: true
-      },
-      redirect: '/result/success',
-      component: 'PageView'
-    },
-    {
-      name: 'success',
-      parentId: 10021,
-      id: 10022,
-      meta: {
-        title: '成功',
-        hiddenHeaderContent: true,
-        show: true
-      },
-      component: 'ResultSuccess'
-    },
-    {
-      name: 'fail',
-      parentId: 10021,
-      id: 10023,
-      meta: {
-        title: '失败',
-        hiddenHeaderContent: true,
-        show: true
-      },
-      component: 'ResultFail'
-    },
+    // // result
+    // {
+    //   name: 'result',
+    //   parentId: 0,
+    //   id: 10021,
+    //   meta: {
+    //     title: '结果页',
+    //     icon: 'check-circle-o',
+    //     show: true
+    //   },
+    //   redirect: '/result/success',
+    //   component: 'PageView'
+    // },
+    // {
+    //   name: 'success',
+    //   parentId: 10021,
+    //   id: 10022,
+    //   meta: {
+    //     title: '成功',
+    //     hiddenHeaderContent: true,
+    //     show: true
+    //   },
+    //   component: 'ResultSuccess'
+    // },
+    // {
+    //   name: 'fail',
+    //   parentId: 10021,
+    //   id: 10023,
+    //   meta: {
+    //     title: '失败',
+    //     hiddenHeaderContent: true,
+    //     show: true
+    //   },
+    //   component: 'ResultFail'
+    // },
 
-    // Exception
-    {
-      name: 'exception',
-      parentId: 0,
-      id: 10024,
-      meta: {
-        title: '异常页',
-        icon: 'warning',
-        show: true
-      },
-      redirect: '/exception/403',
-      component: 'RouteView'
-    },
-    {
-      name: '403',
-      parentId: 10024,
-      id: 10025,
-      meta: {
-        title: '403',
-        show: true
-      },
-      component: 'Exception403'
-    },
-    {
-      name: '404',
-      parentId: 10024,
-      id: 10026,
-      meta: {
-        title: '404',
-        show: true
-      },
-      component: 'Exception404'
-    },
-    {
-      name: '500',
-      parentId: 10024,
-      id: 10027,
-      meta: {
-        title: '500',
-        show: true
-      },
-      component: 'Exception500'
-    },
+    // // Exception
+    // {
+    //   name: 'exception',
+    //   parentId: 0,
+    //   id: 10024,
+    //   meta: {
+    //     title: '异常页',
+    //     icon: 'warning',
+    //     show: true
+    //   },
+    //   redirect: '/exception/403',
+    //   component: 'RouteView'
+    // },
+    // {
+    //   name: '403',
+    //   parentId: 10024,
+    //   id: 10025,
+    //   meta: {
+    //     title: '403',
+    //     show: true
+    //   },
+    //   component: 'Exception403'
+    // },
+    // {
+    //   name: '404',
+    //   parentId: 10024,
+    //   id: 10026,
+    //   meta: {
+    //     title: '404',
+    //     show: true
+    //   },
+    //   component: 'Exception404'
+    // },
+    // {
+    //   name: '500',
+    //   parentId: 10024,
+    //   id: 10027,
+    //   meta: {
+    //     title: '500',
+    //     show: true
+    //   },
+    //   component: 'Exception500'
+    // },
 
     // account
     {
