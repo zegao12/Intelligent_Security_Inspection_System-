@@ -27,6 +27,7 @@ const constantRouterComponents = {
 
   // list
   TableList: () => import('@/views/list/TableList'),
+  SecurityLog: () => import('@/views/list/SecurityLog.vue'),
   StandardList: () => import('@/views/list/BasicList'),
   CardList: () => import('@/views/list/CardList'),
   SearchLayout: () => import('@/views/list/search/SearchLayout'),

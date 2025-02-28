@@ -15,11 +15,12 @@ const serverList = (options) => {
 
   for (let i = 1; i < next; i++) {
     const tmpKey = key + i
+    const tmpKey1 = Math.floor(Math.random() * 6) + 1
     result.push({
       key: tmpKey,
       id: tmpKey,
-      no: 'No ' + tmpKey,
-      description: '这是一段描述',
+      no: '危险物品 ' + tmpKey1,
+      description: '杭州文海南路口01站点',
       callNo: Mock.mock('@integer(1, 999)'),
       status: Mock.mock('@integer(0, 3)'),
       updatedAt: Mock.mock('@datetime'),

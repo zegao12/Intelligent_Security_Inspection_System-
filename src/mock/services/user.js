@@ -585,54 +585,65 @@ const userNav = options => {
       id: 10010,
       meta: {
         icon: 'table',
-        title: '列表页',
+        title: '日志记录',
         show: true
       },
       redirect: '/list/table-list',
       component: 'RouteView'
     },
+    // {
+    //   name: 'table-list',
+    //   parentId: 10010,
+    //   id: 10011,
+    //   path: '/list/table-list/:pageNo([1-9]\\d*)?',
+    //   meta: {
+    //     title: '查询表格',
+    //     show: true
+    //   },
+    //   component: 'TableList'
+    // },
     {
-      name: 'table-list',
+      name: 'security-log',
       parentId: 10010,
-      id: 10011,
+      id: 8888,
       path: '/list/table-list/:pageNo([1-9]\\d*)?',
       meta: {
-        title: '查询表格',
+        title: '危险物品检测日志',
         show: true
       },
-      component: 'TableList'
+      component: 'SecurityLog'
     },
-    {
-      name: 'basic-list',
-      parentId: 10010,
-      id: 10012,
-      meta: {
-        title: '标准列表',
-        show: true
-      },
-      component: 'StandardList'
-    },
-    {
-      name: 'card',
-      parentId: 10010,
-      id: 10013,
-      meta: {
-        title: '卡片列表',
-        show: true
-      },
-      component: 'CardList'
-    },
-    {
-      name: 'search',
-      parentId: 10010,
-      id: 10014,
-      meta: {
-        title: '搜索列表',
-        show: true
-      },
-      redirect: '/list/search/article',
-      component: 'SearchLayout'
-    },
+    // {
+    //   name: 'basic-list',
+    //   parentId: 10010,
+    //   id: 10012,
+    //   meta: {
+    //     title: '标准列表',
+    //     show: true
+    //   },
+    //   component: 'StandardList'
+    // },
+    // {
+    //   name: 'card',
+    //   parentId: 10010,
+    //   id: 10013,
+    //   meta: {
+    //     title: '卡片列表',
+    //     show: true
+    //   },
+    //   component: 'CardList'
+    // },
+    // {
+    //   name: 'search',
+    //   parentId: 10010,
+    //   id: 10014,
+    //   meta: {
+    //     title: '搜索列表',
+    //     show: true
+    //   },
+    //   redirect: '/list/search/article',
+    //   component: 'SearchLayout'
+    // },
     {
       name: 'article',
       parentId: 10014,
