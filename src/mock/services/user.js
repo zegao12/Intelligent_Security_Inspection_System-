@@ -639,23 +639,23 @@ const userNav = options => {
       id: 10010,
       meta: {
         icon: 'table',
-        title: '列表页',
+        title: '日志记录',
         show: true
       },
       redirect: '/list/table-list',
       component: 'RouteView'
     },
-    {
-      name: 'table-list',
-      parentId: 10010,
-      id: 10011,
-      path: '/list/table-list/:pageNo([1-9]\\d*)?',
-      meta: {
-        title: '查询表格',
-        show: true
-      },
-      component: 'TableList'
-    },
+    // {
+    //   name: 'table-list',
+    //   parentId: 10010,
+    //   id: 10011,
+    //   path: '/list/table-list/:pageNo([1-9]\\d*)?',
+    //   meta: {
+    //     title: '查询表格',
+    //     show: true
+    //   },
+    //   component: 'TableList'
+    // },
     {
       name: 'security-log',
       parentId: 10010,
@@ -667,67 +667,67 @@ const userNav = options => {
       },
       component: 'SecurityLog'
     },
-    {
-      name: 'basic-list',
-      parentId: 10010,
-      id: 10012,
-      meta: {
-        title: '标准列表',
-        show: true
-      },
-      component: 'StandardList'
-    },
-    {
-      name: 'card',
-      parentId: 10010,
-      id: 10013,
-      meta: {
-        title: '卡片列表',
-        show: true
-      },
-      component: 'CardList'
-    },
-    {
-      name: 'search',
-      parentId: 10010,
-      id: 10014,
-      meta: {
-        title: '搜索列表',
-        show: true
-      },
-      redirect: '/list/search/article',
-      component: 'SearchLayout'
-    },
-    {
-      name: 'article',
-      parentId: 10014,
-      id: 10015,
-      meta: {
-        title: '搜索列表（文章）',
-        show: true
-      },
-      component: 'SearchArticles'
-    },
-    {
-      name: 'project',
-      parentId: 10014,
-      id: 10016,
-      meta: {
-        title: '搜索列表（项目）',
-        show: true
-      },
-      component: 'SearchProjects'
-    },
-    {
-      name: 'application',
-      parentId: 10014,
-      id: 10017,
-      meta: {
-        title: '搜索列表（应用）',
-        show: true
-      },
-      component: 'SearchApplications'
-    },
+    // {
+    //   name: 'basic-list',
+    //   parentId: 10010,
+    //   id: 10012,
+    //   meta: {
+    //     title: '标准列表',
+    //     show: true
+    //   },
+    //   component: 'StandardList'
+    // },
+    // {
+    //   name: 'card',
+    //   parentId: 10010,
+    //   id: 10013,
+    //   meta: {
+    //     title: '卡片列表',
+    //     show: true
+    //   },
+    //   component: 'CardList'
+    // },
+    // {
+    //   name: 'search',
+    //   parentId: 10010,
+    //   id: 10014,
+    //   meta: {
+    //     title: '搜索列表',
+    //     show: true
+    //   },
+    //   redirect: '/list/search/article',
+    //   component: 'SearchLayout'
+    // },
+    // {
+    //   name: 'article',
+    //   parentId: 10014,
+    //   id: 10015,
+    //   meta: {
+    //     title: '搜索列表（文章）',
+    //     show: true
+    //   },
+    //   component: 'SearchArticles'
+    // },
+    // {
+    //   name: 'project',
+    //   parentId: 10014,
+    //   id: 10016,
+    //   meta: {
+    //     title: '搜索列表（项目）',
+    //     show: true
+    //   },
+    //   component: 'SearchProjects'
+    // },
+    // {
+    //   name: 'application',
+    //   parentId: 10014,
+    //   id: 10017,
+    //   meta: {
+    //     title: '搜索列表（应用）',
+    //     show: true
+    //   },
+    //   component: 'SearchApplications'
+    // },
 
     // profile
     {
