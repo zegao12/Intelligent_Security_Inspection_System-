@@ -64,19 +64,49 @@
     </a-row>
     <a-row :gutter="24">
       <a-col :sm="48" :md="24" :xl="12" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" :title="$t('dashboard.analysis.s1')" >
+        <chart-card :loading="loading" :title="$t('dashboard.analysis.s1')">
+
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" :title="$t('dashboard.analysis.s2')" >
-            <img src="https://www.bing.com/images/search?view=detailV2&ccid=kuRobogR&id=7C1A5A6909B0A3DAAF5EC6A777FBBFA935785991&thid=OIP.kuRobogR_ZSqW2JfyE8ysgHaEs&mediaurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.92e4686e8811fd94aa5b625fc84f32b2%3frik%3dkVl4Nam%252f%252b3enxg%26riu%3dhttp%253a%252f%252fwww.bjfuacm.com%252fstatic%252fimg%252facm_logo.png%26ehk%3dShknKkNzBcduoOQIR3husdnjGPvGl7NYh6%252bK1BvEAKQ%253d%26risl%3d%26pid%3dImgRaw%26r%3d0&exph=3321&expw=5243&q=acm&simid=608040093071464324&FORM=IRPRST&ck=E713B7BB03B140EB84A9E6884881A799&selectedIndex=4&itb=1" alt="123">
+        <chart-card :loading="loading" :title="$t('dashboard.analysis.s2')">
+
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
         <chart-card :loading="loading" :title="$t('dashboard.analysis.s3')">
+
         </chart-card>
       </a-col>
     </a-row>
+    <a-row>
+      <a-col :sm="48" :md="24" :xl="12" :style="{ marginBottom: '24px' }">
+        <div :style="{ background: 'rgb(255, 255, 255)', padding: '16px 16px', height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center' }">
+          <a-space direction="horizontal" style="width: 100%; justify-content: center;">
+            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><RightOutlined />开始安检</a-button>
+            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><PauseOutlined />暂停画面</a-button>
+            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><PlusOutlined />放大画面</a-button>
+            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><MinusOutlined />缩小画面</a-button>
+            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><ArrowUpOutlined />图片增强与超分</a-button>
+            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><StopOutlined />停止安检</a-button>
+          </a-space>
+        </div>
+      </a-col>
+      <a-col :sm="48" :md="24" :xl="12" :style="{ marginBottom: '24px' }">
+        <div :style="{ background: 'rgb(255, 255, 255)', padding: '16px 16px', height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center' }">
+          <a-space direction="horizontal" style="width: 100%; justify-content: center;">
+            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><VerticalAlignTopOutlined />危险物品上报</a-button>
+            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><HistoryOutlined />查看历史记录</a-button>
+            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><PlusOutlined />停止警报</a-button>
+            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><MenuOutlined />危险等级自定义</a-button>
+            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><CloudUploadOutlined />升级AI模型</a-button>
+          </a-space>
+        </div>
+      </a-col>
+    </a-row>
+  </div>
+
+  <!-- </a-row>
     <a-card :loading="loading" :bordered="false" :body-style="{padding: '0'}">
       <div class="salesCard">
         <a-tabs default-active-key="1" size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
@@ -140,7 +170,6 @@
                     </a-tooltip>
                   </span>
                 </number-info>
-                <!-- miniChart -->
                 <div>
                   <mini-smooth-area :style="{ height: '45px' }" :dataSource="searchUserData" :scale="searchUserScale" />
                 </div>
@@ -154,7 +183,6 @@
                     </a-tooltip>
                   </span>
                 </number-info>
-                <!-- miniChart -->
                 <div>
                   <mini-smooth-area :style="{ height: '45px' }" :dataSource="searchUserData" :scale="searchUserScale" />
                 </div>
@@ -180,7 +208,6 @@
         <a-col :xl="12" :lg="24" :md="24" :sm="24" :xs="24">
           <a-card class="antd-pro-pages-dashboard-analysis-salesCard" :loading="loading" :bordered="false" :title="$t('dashboard.analysis.the-proportion-of-sales')" :style="{ height: '100%' }">
             <div slot="extra" style="height: inherit;">
-              <!-- style="bottom: 12px;display: inline-block;" -->
               <span class="dashboard-analysis-iconGroup">
                 <a-dropdown :trigger="['click']" placement="bottomLeft">
                   <a-icon type="ellipsis" class="ant-dropdown-link" />
@@ -205,12 +232,10 @@
             </div>
             <h4>{{ $t('dashboard.analysis.sales') }}</h4>
             <div>
-              <!-- style="width: calc(100% - 240px);" -->
               <div>
                 <v-chart :force-fit="true" :height="405" :data="pieData" :scale="pieScale">
                   <v-tooltip :showTitle="false" dataKey="item*percent" />
                   <v-axis />
-                  <!-- position="right" :offsetX="-140" -->
                   <v-legend dataKey="item"/>
                   <v-pie position="percent" color="item" :vStyle="pieStyle" />
                   <v-coord type="theta" :radius="0.75" :innerRadius="0.6" />
@@ -222,12 +247,15 @@
         </a-col>
       </a-row>
     </div>
-  </div>
+  </div> -->
 </template>
 
     <script>
     import moment from 'moment'
+    import CardItem from '@/components/mycomponent/CardItem'
+
     import {
+
       ChartCard,
       MiniArea,
       MiniBar,
@@ -321,6 +349,7 @@
       name: 'Analysis',
       mixins: [baseMixin],
       components: {
+        CardItem,
         ChartCard,
         MiniArea,
         MiniBar,
@@ -335,7 +364,20 @@
         return {
           loading: true,
           rankList,
-
+          cardData: [
+        {
+          title: '安检画面',
+          imgsrc: 'https://th.bing.com/th/id/OIP.d2_oclpVd2RCJ3OrPcpskwHaIa?rs=1&pid=ImgDetMain'
+        },
+        {
+          title: '检出物图像',
+          imgsrc: 'https://newsimg.5054399.com/uploads/userup/1906/251635233331.jpg'
+        },
+        {
+          title: '检出物分析',
+          imgsrc: 'https://info.zufe.edu.cn/__local/6/C8/F4/0FF24071B470249DB40E8FA1E0F_EBCC09C4_45BD1.jpg'
+        }
+      ],
           // 搜索用户数
           searchUserData,
           searchUserScale,
@@ -389,6 +431,11 @@
     </script>
 
     <style lang="less" scoped>
+     .card{
+    display: flex;
+    color: #56e619;
+    padding: 10px;
+  }
       .extra-wrapper {
         line-height: 55px;
         padding-right: 24px;
