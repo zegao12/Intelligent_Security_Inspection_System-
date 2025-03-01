@@ -19,6 +19,7 @@
           <template slot="footer">{{ $t('dashboard.analysis.day-sales') }}<span>1234件</span></template>
         </chart-card>
       </a-col>
+
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
         <chart-card :loading="loading" :title="$t('dashboard.analysis.visits')" :total="8846 | NumberFormat">
           <a-tooltip :title="$t('dashboard.analysis.introduce')" slot="action">
@@ -30,6 +31,7 @@
           <template slot="footer">{{ $t('dashboard.analysis.day-visits') }}<span> {{ '1234' | NumberFormat }}</span></template>
         </chart-card>
       </a-col>
+
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
         <chart-card :loading="loading" :title="$t('dashboard.analysis.payments')" :total="6560 | NumberFormat">
           <a-tooltip :title="$t('dashboard.analysis.introduce')" slot="action">
@@ -41,6 +43,7 @@
           <template slot="footer">{{ $t('dashboard.analysis.conversion-rate') }} <span>60%</span></template>
         </chart-card>
       </a-col>
+
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
         <chart-card :loading="loading" :title="$t('dashboard.analysis.operational-effect')" total="预计排队3分钟">
           <a-tooltip :title="$t('dashboard.analysis.introduce')" slot="action">
@@ -62,197 +65,128 @@
         </chart-card>
       </a-col>
     </a-row>
+
     <a-row :gutter="24">
       <a-col :sm="48" :md="24" :xl="12" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" :title="$t('dashboard.analysis.s1')">
-
-        </chart-card>
+        <a-card hoverable style="width: 100%">
+          <template #cover>
+            <a-card-meta title="安检画面" style="margin: 25px;" />
+            <img alt="example" src="@/img/微信截图_20250301143628.png" />
+          </template>
+        </a-card>
       </a-col>
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" :title="$t('dashboard.analysis.s2')">
 
-        </chart-card>
+      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
+        <a-card hoverable style="width: 100%">
+          <template #cover>
+            <a-card-meta title="检出物图像" style="margin: 25px;" />
+            <img alt="example" src="@/img/微信截图_20250301150243.png" />
+          </template>
+        </a-card>
       </a-col>
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" :title="$t('dashboard.analysis.s3')">
 
-        </chart-card>
+      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
+        <a-card class="antd-pro-pages-dashboard-analysis-salesCard" :loading="loading" :bordered="false" :title="$t('dashboard.analysis.the-proportion-of-sales')" :style="{ height: '100%' }">
+          <div slot="extra" style="height: inherit;">
+            <span class="dashboard-analysis-iconGroup">
+              <a-dropdown :trigger="['click']" placement="bottomLeft">
+                <a-icon type="ellipsis" class="ant-dropdown-link" />
+                <a-menu slot="overlay">
+                  <a-menu-item>
+                    <a href="javascript:;">{{ $t('dashboard.analysis.dropdown-option-one') }}</a>
+                  </a-menu-item>
+                  <a-menu-item>
+                    <a href="javascript:;">{{ $t('dashboard.analysis.dropdown-option-two') }}</a>
+                  </a-menu-item>
+                </a-menu>
+              </a-dropdown>
+            </span>
+          </div>
+          <h4>{{ $t('dashboard.analysis.sales') }}</h4>
+          <div>
+            <div>
+              <v-chart :force-fit="true" :height="300" :data="pieData" :scale="pieScale">
+                <v-tooltip :showTitle="false" dataKey="item*percent" />
+                <v-axis />
+                <v-legend dataKey="item"/>
+                <v-pie position="percent" color="item" :vStyle="pieStyle" />
+                <v-coord type="theta" :radius="0.6" :innerRadius="0.5" />
+              </v-chart>
+            </div>
+          </div>
+        </a-card>
       </a-col>
     </a-row>
-    <a-row>
+
+    <a-row :gutter="24">
       <a-col :sm="48" :md="24" :xl="12" :style="{ marginBottom: '24px' }">
-        <div :style="{ background: 'rgb(255, 255, 255)', padding: '16px 16px', height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center' }">
+        <div :style="{ background: 'rgb(255, 255, 255)', padding: '16px 16px', height: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }">
           <a-space direction="horizontal" style="width: 100%; justify-content: center;">
-            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><RightOutlined />开始安检</a-button>
-            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><PauseOutlined />暂停画面</a-button>
-            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><PlusOutlined />放大画面</a-button>
-            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><MinusOutlined />缩小画面</a-button>
-            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><ArrowUpOutlined />图片增强与超分</a-button>
-            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><StopOutlined />停止安检</a-button>
+            <a-button type="primary" danger ghost size="small" style="display: flex; align-items: center;font-size: 12px;background: rgb(245,245,245) !important;color: rgb(217,217,217);border-color: rgb(217,217,217)">
+              <svg width="16" viewBox="0 0 48 48" fill="none" style="margin-right:10px;"><path d="M16 39.513l15.556-15.557L16 8.4" stroke="rgb(217,217,217)" stroke-width="2"/></svg>
+              开始安检
+            </a-button>
+            <a-button type="primary" danger ghost size="small" style="display: flex; align-items: center;font-size: 12px;">
+              <svg width="16" viewBox="0 0 48 48" fill="none" style="margin-right:10px"><path d="M42 24c0 9.941-8.059 18-18 18S6 33.941 6 24 14.059 6 24 6s18 8.059 18 18z" stroke="rgb(64,159,255)" stroke-width="2"/><path d="M19 19v10h1V19h-1zM28 19v10h1V19h-1z" stroke="#4E5969" stroke-width="2"/></svg>
+              暂停画面
+            </a-button>
+            <a-button type="primary" danger ghost size="small" style="display: flex; align-items: center;font-size: 12px;">
+              <svg width="16" viewBox="0 0 48 48" fill="none" style="margin-right:10px"><path d="M5 24h38M24 5v38" stroke="rgb(64,159,255)" stroke-width="2"/></svg>
+              放大画面
+            </a-button>
+            <a-button type="primary" danger ghost size="small" style="display: flex; align-items: center;font-size: 12px;">
+              <svg width="16" viewBox="0 0 48 48" fill="none" style="margin-right:10px"><path d="M5 24h38" stroke="rgb(64,159,255)" stroke-width="2"/></svg>
+              缩小画面
+            </a-button>
+            <a-button type="primary" danger ghost size="small" style="display: flex; align-items: center;font-size: 12px;">
+              <svg width="16" viewBox="0 0 48 48" fill="none" style="margin-right:10px"><path d="M11.27 20.272L23.998 7.544l12.728 12.728M24 43V8.705" stroke="rgb(64,159,255)" stroke-width="2"/></svg>
+              图片增强与超分
+            </a-button>
+            <a-button type="primary" danger ghost size="small" style="display: flex; align-items: center;font-size: 12px;border-color: red;color: red;">
+              <svg width="16" viewBox="0 0 48 48" fill="none" style="margin-right:10px"><path d="M36.728 11.272c7.03 7.03 7.03 18.427 0 25.456-7.03 7.03-18.427 7.03-25.456 0-7.03-7.03-7.03-18.427 0-25.456 7.03-7.03 18.427-7.03 25.456 0zM36.728 36.728L11.272 11.272" stroke="red" stroke-width="2"/></svg>
+              停止安检
+            </a-button>
           </a-space>
         </div>
       </a-col>
+      <!-- <a-col :style="{ height: '24px' }"></a-col> -->
       <a-col :sm="48" :md="24" :xl="12" :style="{ marginBottom: '24px' }">
-        <div :style="{ background: 'rgb(255, 255, 255)', padding: '16px 16px', height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center' }">
+        <div :style="{ background: 'rgb(255, 255, 255)', padding: '16px 16px', height: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }">
           <a-space direction="horizontal" style="width: 100%; justify-content: center;">
-            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><VerticalAlignTopOutlined />危险物品上报</a-button>
-            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><HistoryOutlined />查看历史记录</a-button>
-            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><PlusOutlined />停止警报</a-button>
-            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><MenuOutlined />危险等级自定义</a-button>
-            <a-button type="primary" danger ghost size="small" style="flex: 1; margin: 0 1px;"><CloudUploadOutlined />升级AI模型</a-button>
+            <a-button type="primary" danger ghost size="small" style="display: flex; align-items: center;font-size: 12px;background: rgb(245,245,245) !important;color: rgb(217,217,217);border-color: rgb(217,217,217)">
+              <svg width="16" viewBox="0 0 48 48" fill="none" style="margin-right: 10px;"><path d="M40 35v6H8v-6M14.93 17.071L24.001 8l9.071 9.071M24.002 33.142v-25" stroke="#4E5969" stroke-width="2"/></svg>
+              危险物品上报
+            </a-button>
+            <a-button type="primary" danger ghost size="small" style="display: flex; align-items: center;font-size: 12px;">
+              <svg width="16" viewBox="0 0 48 48" fill="none" style="margin-right:10px"><path d="M9 33.953C12.225 38.803 17.74 42 24 42c9.941 0 18-8.059 18-18S33.941 6 24 6C14.313 6 6.413 13.653 6.016 23.243c-.01.25-.016.503-.016.757" stroke="rgb(64,159,255)" stroke-width="2"/><path d="M32 26h-9v-9M5.5 23.243L6 24l.5-.757h-1z" stroke="#4E5969" stroke-width="2"/></svg>
+              查看历史记录
+            </a-button>
+            <a-button type="primary" danger ghost size="small" style="display: flex; align-items: center;font-size: 12px;background: rgb(245,245,245) !important;color: rgb(217,217,217);border-color: rgb(217,217,217)">
+              <svg width="16" viewBox="0 0 48 48" fill="none" style="margin-right:10px"><path d="M36.728 11.272c7.03 7.03 7.03 18.427 0 25.456-7.03 7.03-18.427 7.03-25.456 0-7.03-7.03-7.03-18.427 0-25.456 7.03-7.03 18.427-7.03 25.456 0zM36.728 36.728L11.272 11.272" stroke="#4E5969" stroke-width="2"/></svg>
+              停止警报
+            </a-button>
+            <a-button type="primary" danger ghost size="small" style="display: flex; align-items: center;font-size: 12px;">
+              <svg width="16" viewBox="0 0 48 48" fill="none" style="margin-right:10px"><path d="M13 24h30M5 11h4m4 26h30M13 11h30M5 24h4M5 37h4" stroke="rgb(64,159,255)" stroke-width="2"/></svg>
+              危险等级自定义
+            </a-button>
+            <a-button type="primary" danger ghost size="small" style="display: flex; align-items: center;font-size: 12px;">
+              <svg width="16" viewBox="0 0 48 48" fill="none" style="margin-right:10px"><path d="M43 22c0-7.732-6.492-14-14.5-14S14 14.268 14 22v.055A9.001 9.001 0 0015 40h13" stroke="rgb(64,159,255)" stroke-width="2"/><path d="M44.142 34.071l-7.07 7.071L30 34.071M37.07 26v15" stroke="#4E5969" stroke-width="2"/></svg>
+              升级AI模型
+            </a-button>
           </a-space>
         </div>
       </a-col>
+
     </a-row>
   </div>
 
-  <!-- </a-row>
-    <a-card :loading="loading" :bordered="false" :body-style="{padding: '0'}">
-      <div class="salesCard">
-        <a-tabs default-active-key="1" size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
-          <div class="extra-wrapper" slot="tabBarExtraContent">
-            <div class="extra-item">
-              <a>{{ $t('dashboard.analysis.all-day') }}</a>
-              <a>{{ $t('dashboard.analysis.all-week') }}</a>
-              <a>{{ $t('dashboard.analysis.all-month') }}</a>
-              <a>{{ $t('dashboard.analysis.all-year') }}</a>
-            </div>
-            <a-range-picker :style="{width: '256px'}" />
-          </div>
-          <a-tab-pane loading="true" :tab="$t('dashboard.analysis.sales')" key="1">
-            <a-row>
-              <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-                <bar :data="barData" :title="$t('dashboard.analysis.sales-trend')" />
-              </a-col>
-              <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
-                <rank-list :title="$t('dashboard.analysis.sales-ranking')" :list="rankList"/>
-              </a-col>
-            </a-row>
-          </a-tab-pane>
-          <a-tab-pane :tab="$t('dashboard.analysis.visits')" key="2">
-            <a-row>
-              <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-                <bar :data="barData2" :title="$t('dashboard.analysis.visits-trend')" />
-              </a-col>
-              <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
-                <rank-list :title="$t('dashboard.analysis.visits-ranking')" :list="rankList"/>
-              </a-col>
-            </a-row>
-          </a-tab-pane>
-        </a-tabs>
-      </div>
-    </a-card>
-
-    <div class="antd-pro-pages-dashboard-analysis-twoColLayout" :class="!isMobile && 'desktop'">
-      <a-row :gutter="24" type="flex" :style="{ marginTop: '24px' }">
-        <a-col :xl="12" :lg="24" :md="24" :sm="24" :xs="24">
-          <a-card :loading="loading" :bordered="false" :title="$t('dashboard.analysis.online-top-search')" :style="{ height: '100%' }">
-            <a-dropdown :trigger="['click']" placement="bottomLeft" slot="extra">
-              <a class="ant-dropdown-link" href="#">
-                <a-icon type="ellipsis" />
-              </a>
-              <a-menu slot="overlay">
-                <a-menu-item>
-                  <a href="javascript:;">{{ $t('dashboard.analysis.dropdown-option-one') }}</a>
-                </a-menu-item>
-                <a-menu-item>
-                  <a href="javascript:;">{{ $t('dashboard.analysis.dropdown-option-two') }}</a>
-                </a-menu-item>
-              </a-menu>
-            </a-dropdown>
-            <a-row :gutter="68">
-              <a-col :xs="24" :sm="12" :style="{ marginBottom: ' 24px'}">
-                <number-info :total="12321" :sub-total="17.1">
-                  <span slot="subtitle">
-                    <span>{{ $t('dashboard.analysis.search-users') }}</span>
-                    <a-tooltip :title="$t('dashboard.analysis.introduce')" slot="action">
-                      <a-icon type="info-circle-o" :style="{ marginLeft: '8px' }" />
-                    </a-tooltip>
-                  </span>
-                </number-info>
-                <div>
-                  <mini-smooth-area :style="{ height: '45px' }" :dataSource="searchUserData" :scale="searchUserScale" />
-                </div>
-              </a-col>
-              <a-col :xs="24" :sm="12" :style="{ marginBottom: ' 24px'}">
-                <number-info :total="2.7" :sub-total="26.2" status="down">
-                  <span slot="subtitle">
-                    <span>{{ $t('dashboard.analysis.per-capita-search') }}</span>
-                    <a-tooltip :title="$t('dashboard.analysis.introduce')" slot="action">
-                      <a-icon type="info-circle-o" :style="{ marginLeft: '8px' }" />
-                    </a-tooltip>
-                  </span>
-                </number-info>
-                <div>
-                  <mini-smooth-area :style="{ height: '45px' }" :dataSource="searchUserData" :scale="searchUserScale" />
-                </div>
-              </a-col>
-            </a-row>
-            <div class="ant-table-wrapper">
-              <a-table
-                row-key="index"
-                size="small"
-                :columns="searchTableColumns"
-                :dataSource="searchData"
-                :pagination="{ pageSize: 5 }"
-              >
-                <span slot="range" slot-scope="text, record">
-                  <trend :flag="record.status === 0 ? 'up' : 'down'">
-                    {{ text }}%
-                  </trend>
-                </span>
-              </a-table>
-            </div>
-          </a-card>
-        </a-col>
-        <a-col :xl="12" :lg="24" :md="24" :sm="24" :xs="24">
-          <a-card class="antd-pro-pages-dashboard-analysis-salesCard" :loading="loading" :bordered="false" :title="$t('dashboard.analysis.the-proportion-of-sales')" :style="{ height: '100%' }">
-            <div slot="extra" style="height: inherit;">
-              <span class="dashboard-analysis-iconGroup">
-                <a-dropdown :trigger="['click']" placement="bottomLeft">
-                  <a-icon type="ellipsis" class="ant-dropdown-link" />
-                  <a-menu slot="overlay">
-                    <a-menu-item>
-                      <a href="javascript:;">{{ $t('dashboard.analysis.dropdown-option-one') }}</a>
-                    </a-menu-item>
-                    <a-menu-item>
-                      <a href="javascript:;">{{ $t('dashboard.analysis.dropdown-option-two') }}</a>
-                    </a-menu-item>
-                  </a-menu>
-                </a-dropdown>
-              </span>
-              <div class="analysis-salesTypeRadio">
-                <a-radio-group defaultValue="a">
-                  <a-radio-button value="a">{{ $t('dashboard.analysis.channel.all') }}</a-radio-button>
-                  <a-radio-button value="b">{{ $t('dashboard.analysis.channel.online') }}</a-radio-button>
-                  <a-radio-button value="c">{{ $t('dashboard.analysis.channel.stores') }}</a-radio-button>
-                </a-radio-group>
-              </div>
-
-            </div>
-            <h4>{{ $t('dashboard.analysis.sales') }}</h4>
-            <div>
-              <div>
-                <v-chart :force-fit="true" :height="405" :data="pieData" :scale="pieScale">
-                  <v-tooltip :showTitle="false" dataKey="item*percent" />
-                  <v-axis />
-                  <v-legend dataKey="item"/>
-                  <v-pie position="percent" color="item" :vStyle="pieStyle" />
-                  <v-coord type="theta" :radius="0.75" :innerRadius="0.6" />
-                </v-chart>
-              </div>
-
-            </div>
-          </a-card>
-        </a-col>
-      </a-row>
-    </div>
-  </div> -->
 </template>
 
     <script>
     import moment from 'moment'
     import CardItem from '@/components/mycomponent/CardItem'
+    import { onMounted, ref } from 'vue'
+    import * as echarts from 'echarts'
 
     import {
 
@@ -360,6 +294,57 @@
         NumberInfo,
         MiniSmoothArea
       },
+      setup () {
+    const pieChart = ref(null)
+
+    onMounted(() => {
+      if (pieChart.value) {
+        const chart = echarts.init(pieChart.value)
+        const option = {
+          title: {
+            text: '检出物分析',
+            left: 'center',
+            top: '20px',
+            textStyle: {
+              fontSize: 16,
+              fontWeight: 'bold'
+            }
+          },
+          tooltip: {
+            trigger: 'item'
+          },
+          legend: {
+            orient: 'vertical',
+            left: 'left',
+            top: '50px'
+          },
+          series: [
+            {
+              name: '检出物',
+              type: 'pie',
+              radius: '50%',
+              data: [
+                { value: 70, name: '安全物品' },
+                { value: 30, name: '危险刀具' }
+              ],
+              emphasis: {
+                itemStyle: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+              }
+            }
+          ]
+        }
+        chart.setOption(option)
+      }
+    })
+
+    return {
+      pieChart
+    }
+  },
       data () {
         return {
           loading: true,

@@ -740,7 +740,7 @@ const userNav = options => {
     //   component: 'SearchApplications'
     // },
 
-    // profile
+    // // profile
     // {
     //   name: 'profile',
     //   parentId: 0,
