@@ -1,8 +1,8 @@
 <template>
   <div>
-    <a-row :gutter="24">
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" :title="$t('dashboard.analysis.total-sales')" total="126,560件">
+    <a-row :gutter="24" style="display: flex; flex-wrap: wrap;">
+      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px', display: 'flex', flexDirection: 'column' }">
+        <chart-card :loading="loading" :title="$t('dashboard.analysis.total-sales')" total="126,560件" style="flex: 1;">
           <a-tooltip :title="$t('dashboard.analysis.introduce')" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
@@ -20,8 +20,8 @@
         </chart-card>
       </a-col>
 
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" :title="$t('dashboard.analysis.visits')" :total="8846 | NumberFormat">
+      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px', display: 'flex', flexDirection: 'column' }">
+        <chart-card :loading="loading" :title="$t('dashboard.analysis.visits')" :total="8846 | NumberFormat" style="flex: 1;">
           <a-tooltip :title="$t('dashboard.analysis.introduce')" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
@@ -32,8 +32,8 @@
         </chart-card>
       </a-col>
 
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" :title="$t('dashboard.analysis.payments')" :total="6560 | NumberFormat">
+      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px', display: 'flex', flexDirection: 'column' }">
+        <chart-card :loading="loading" :title="$t('dashboard.analysis.payments')" :total="6560 | NumberFormat" style="flex: 1;">
           <a-tooltip :title="$t('dashboard.analysis.introduce')" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
@@ -44,8 +44,8 @@
         </chart-card>
       </a-col>
 
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" :title="$t('dashboard.analysis.operational-effect')" total="预计排队3分钟">
+      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px', display: 'flex', flexDirection: 'column' }">
+        <chart-card :loading="loading" :title="$t('dashboard.analysis.operational-effect')" total="预计排队3分钟" style="flex: 1;">
           <a-tooltip :title="$t('dashboard.analysis.introduce')" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
@@ -66,9 +66,9 @@
       </a-col>
     </a-row>
 
-    <a-row :gutter="24">
-      <a-col :sm="48" :md="24" :xl="12" :style="{ marginBottom: '24px' }">
-        <a-card hoverable style="width: 100%">
+    <a-row :gutter="24" style="display: flex; flex-wrap: wrap;">
+      <a-col :sm="48" :md="24" :xl="12" :style="{ marginBottom: '24px', display: 'flex', flexDirection: 'column' }">
+        <a-card hoverable style="width: 100%; flex: 1;">
           <template #cover>
             <a-card-meta title="安检画面" style="margin: 25px;" />
             <img alt="example" src="@/img/微信截图_20250301143628.png" />
@@ -76,8 +76,8 @@
         </a-card>
       </a-col>
 
-      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <a-card hoverable style="width: 100%">
+      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px', display: 'flex', flexDirection: 'column' }">
+        <a-card hoverable style="width: 100%; flex: 1;">
           <template #cover>
             <a-card-meta title="检出物图像" style="margin: 25px;" />
             <img alt="example" src="@/img/微信截图_20250301150243.png" />
@@ -86,7 +86,7 @@
       </a-col>
 
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <a-card class="antd-pro-pages-dashboard-analysis-salesCard" :loading="loading" :bordered="false" :title="$t('dashboard.analysis.the-proportion-of-sales')" :style="{ height: '100%' }">
+        <a-card class="antd-pro-pages-dashboard-analysis-salesCard" :loading="loading" :bordered="false" :title="$t('dashboard.analysis.the-proportion-of-sales')">
           <div slot="extra" style="height: inherit;">
             <span class="dashboard-analysis-iconGroup">
               <a-dropdown :trigger="['click']" placement="bottomLeft">
@@ -102,17 +102,15 @@
               </a-dropdown>
             </span>
           </div>
-          <h4>{{ $t('dashboard.analysis.sales') }}</h4>
-          <div>
-            <div>
-              <v-chart :force-fit="true" :height="300" :data="pieData" :scale="pieScale">
-                <v-tooltip :showTitle="false" dataKey="item*percent" />
-                <v-axis />
-                <v-legend dataKey="item"/>
-                <v-pie position="percent" color="item" :vStyle="pieStyle" />
-                <v-coord type="theta" :radius="0.6" :innerRadius="0.5" />
-              </v-chart>
-            </div>
+
+          <div class="chart-container">
+            <v-chart :force-fit="true" :height="300" :data="pieData" :scale="pieScale">
+              <v-tooltip :showTitle="false" dataKey="item*percent" />
+              <v-axis />
+              <v-legend dataKey="item"/>
+              <v-pie position="percent" color="item" :vStyle="pieStyle" />
+              <v-coord type="theta" :radius="1" :innerRadius="0.5" />
+            </v-chart>
           </div>
         </a-card>
       </a-col>
@@ -185,8 +183,6 @@
     <script>
     import moment from 'moment'
     import CardItem from '@/components/mycomponent/CardItem'
-    import { onMounted, ref } from 'vue'
-    import * as echarts from 'echarts'
 
     import {
 
@@ -256,12 +252,8 @@
     const DataSet = require('@antv/data-set')
 
     const sourceData = [
-      { item: '家用电器', count: 32.2 },
-      { item: '食用酒水', count: 21 },
-      { item: '个护健康', count: 17 },
-      { item: '服饰箱包', count: 13 },
-      { item: '母婴产品', count: 9 },
-      { item: '其他', count: 7.8 }
+      { item: '安全物品', count: 79.8 },
+      { item: '危险刀具', count: 20.2 }
     ]
 
     const pieScale = [{
@@ -294,57 +286,6 @@
         NumberInfo,
         MiniSmoothArea
       },
-      setup () {
-    const pieChart = ref(null)
-
-    onMounted(() => {
-      if (pieChart.value) {
-        const chart = echarts.init(pieChart.value)
-        const option = {
-          title: {
-            text: '检出物分析',
-            left: 'center',
-            top: '20px',
-            textStyle: {
-              fontSize: 16,
-              fontWeight: 'bold'
-            }
-          },
-          tooltip: {
-            trigger: 'item'
-          },
-          legend: {
-            orient: 'vertical',
-            left: 'left',
-            top: '50px'
-          },
-          series: [
-            {
-              name: '检出物',
-              type: 'pie',
-              radius: '50%',
-              data: [
-                { value: 70, name: '安全物品' },
-                { value: 30, name: '危险刀具' }
-              ],
-              emphasis: {
-                itemStyle: {
-                  shadowBlur: 10,
-                  shadowOffsetX: 0,
-                  shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-              }
-            }
-          ]
-        }
-        chart.setOption(option)
-      }
-    })
-
-    return {
-      pieChart
-    }
-  },
       data () {
         return {
           loading: true,
@@ -441,7 +382,12 @@
         display: block;
         flex-flow: row wrap;
       }
-
+      .chart-container {
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center;     /* 垂直居中 */
+  height: 300px;          /* 设置容器高度 */
+}
       .antd-pro-pages-dashboard-analysis-salesCard {
         height: calc(100% - 24px);
         /deep/ .ant-card-head {

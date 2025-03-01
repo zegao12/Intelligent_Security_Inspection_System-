@@ -2,7 +2,7 @@
   <div>
     <a-row :gutter="24">
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" :title="$t('dashboard.analysis.total-sales')" total="￥126,560">
+        <chart-card :loading="loading" :title="$t('dashboard.analysis.total-sales')" total="126,560件">
           <a-tooltip :title="$t('dashboard.analysis.introduce')" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
@@ -99,10 +99,11 @@
       </div>
     </a-card>
 
-    <div class="antd-pro-pages-dashboard-analysis-twoColLayout" :class="!isMobile && 'desktop'">
-      <a-row :gutter="24" type="flex" :style="{ marginTop: '24px' }">
-        <a-col :xl="12" :lg="24" :md="24" :sm="24" :xs="24">
-          <a-card :loading="loading" :bordered="false" :title="$t('dashboard.analysis.online-top-search')" :style="{ height: '100%' }">
+    <div :class="!isMobile && 'desktop'">
+      <a-row :gutter="24" type="flex" :style="{ marginTop: '24px', alignItems: 'stretch' }">
+        <!-- 第一列 -->
+        <a-col :sm="48" :md="24" :xl="12" style="display: flex; flex-direction: column; height: 100%">
+          <a-card :loading="loading" :bordered="false" :title="$t('dashboard.analysis.online-top-search')" :style="{ flex: 1, height: '100%' }">
             <a-dropdown :trigger="['click']" placement="bottomLeft" slot="extra">
               <a class="ant-dropdown-link" href="#">
                 <a-icon type="ellipsis" />
@@ -117,7 +118,7 @@
               </a-menu>
             </a-dropdown>
             <a-row :gutter="68">
-              <a-col :xs="24" :sm="12" :style="{ marginBottom: ' 24px'}">
+              <a-col :xs="24" :sm="12" :style="{ marginBottom: '24px'}">
                 <number-info :total="185271" :sub-total="17.1">
                   <span slot="subtitle">
                     <span>{{ $t('dashboard.analysis.search-users') }}</span>
@@ -131,7 +132,7 @@
                   <mini-smooth-area :style="{ height: '45px' }" :dataSource="searchUserData" :scale="searchUserScale" />
                 </div>
               </a-col>
-              <a-col :xs="24" :sm="12" :style="{ marginBottom: ' 24px'}">
+              <a-col :xs="24" :sm="12" :style="{ marginBottom: '24px'}">
                 <number-info :total="18900" :sub-total="26.2" status="down">
                   <span slot="subtitle">
                     <span>{{ $t('dashboard.analysis.per-capita-search') }}</span>
@@ -162,8 +163,27 @@
             </div>
           </a-card>
         </a-col>
-        <a-col :xl="12" :lg="24" :md="24" :sm="24" :xs="24">
-          <a-card class="antd-pro-pages-dashboard-analysis-salesCard" :loading="loading" :bordered="false" :title="$t('dashboard.analysis.the-proportion-of-sales')" :style="{ height: '100%' }">
+
+        <!-- 第二列 -->
+        <a-col :sm="24" :md="12" :xl="6" style="display: flex; flex-direction: column; height: 100%">
+          <a-card
+            class="antd-pro-pages-dashboard-analysis-salesCard"
+            :bordered="false"
+            title="安检指数"
+            :style="{ flex: 1, height: '100%' }"
+          >
+            <div
+              ref="cardContainer"
+              style="min-height: 400px; display: flex; justify-content: center; align-items: center; width: 100%; flex: 1;"
+            >
+              <div ref="radarChart" style="width: 80%; height: 400px;"></div>
+            </div>
+          </a-card>
+        </a-col>
+
+        <!-- 第三列 -->
+        <a-col :sm="24" :md="12" :xl="6" style="display: flex; flex-direction: column; height: 100%">
+          <a-card class="antd-pro-pages-dashboard-analysis-salesCard" :loading="loading" :bordered="false" :title="$t('dashboard.analysis.the-proportion-of-sales')" :style="{ flex: 1, height: '100%' }">
             <div slot="extra" style="height: inherit;">
               <span class="dashboard-analysis-iconGroup">
                 <a-dropdown :trigger="['click']" placement="bottomLeft">
@@ -179,43 +199,38 @@
                 </a-dropdown>
               </span>
               <div class="analysis-salesTypeRadio">
-                <a-radio-group defaultValue="a">
+                <a-radio-group defaultValue="a" size="small" style="align-self: center;">
                   <a-radio-button value="a">{{ $t('dashboard.analysis.channel.all') }}</a-radio-button>
                   <a-radio-button value="b">{{ $t('dashboard.analysis.channel.online') }}</a-radio-button>
                   <a-radio-button value="c">{{ $t('dashboard.analysis.channel.stores') }}</a-radio-button>
                 </a-radio-group>
               </div>
-
             </div>
             <h4>{{ $t('dashboard.analysis.sales') }}</h4>
             <div>
-              <!-- style="width: calc(100% - 240px);" -->
-              <div>
-                <v-chart :force-fit="true" :height="405" :data="pieData" :scale="pieScale">
-                  <v-tooltip :showTitle="false" dataKey="item*percent" />
-                  <v-axis />
-                  <!-- position="right" :offsetX="-140" -->
-                  <v-legend dataKey="item"/>
-                  <v-pie position="percent" color="item" :vStyle="pieStyle" />
-                  <v-coord type="theta" :radius="0.75" :innerRadius="0.6" />
-                </v-chart>
-              </div>
-
+              <v-chart :force-fit="true" :height="405" :data="pieData" :scale="pieScale">
+                <v-tooltip :showTitle="false" dataKey="item*percent" />
+                <v-axis />
+                <v-legend dataKey="item"/>
+                <v-pie position="percent" color="item" :vStyle="pieStyle" />
+                <v-coord type="theta" :radius="0.75" :innerRadius="0.6" />
+              </v-chart>
             </div>
           </a-card>
         </a-col>
       </a-row>
+
     </div>
 
     <!-- 添加雷达图和扇形图的 div 元素 -->
-    <a-row :gutter="24" type="flex" :style="{ marginTop: '24px' }">
+    <!-- <a-row :gutter="24" type="flex" :style="{ marginTop: '24px' }">
       <a-col :xl="12" :lg="12" :md="24" :sm="24" :xs="24">
         <div ref="radarChart" style="width: 100%; height: 400px;"></div>
       </a-col>
       <a-col :xl="12" :lg="12" :md="24" :sm="24" :xs="24">
         <div ref="pieChart" style="width: 100%; height: 400px;"></div>
       </a-col>
-    </a-row>
+    </a-row> -->
   </div>
 </template>
 
@@ -379,27 +394,43 @@ export default {
   },
   mounted () {
     this.initRadarChart()
+    this.handleResize()// 初次加载时调整大小
+    window.addEventListener('resize', this.handleResize) // 添加resize事件监听
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.handleResize) // 销毁前移除事件监听
   },
   methods: {
+    handleResize () {
+      const cardContainer = this.$refs.cardContainer
+      const radarChart = this.$refs.radarChart
+
+      const containerWidth = cardContainer.offsetWidth
+      const chartWidth = Math.min(containerWidth * 0.8, 600) // 设置最大宽度
+      radarChart.style.width = `${chartWidth}px` // 根据卡片宽度调整图表宽度
+    },
     initRadarChart () {
       const radarChart = echarts.init(this.$refs.radarChart)
       const option = {
         title: {
-          text: '安检指数'
         },
         tooltip: {},
         legend: {
+           x: 'center',
+          y: 'bottom',
           data: ['浙江省', '杭州市', '本站点']
         },
         radar: {
           indicator: [
             { name: '客流量', max: 100 },
             { name: '高危物品', max: 100 },
-            { name: '案件负载', max: 100 },
-            { name: '输出量', max: 100 },
-            { name: '排队时间', max: 100 }
+            { name: '安检负载', max: 100 },
+            { name: '检出度', max: 100 },
+            { name: '排队时间', max: 100 },
+            { name: '峰谷流量', max: 100 }
           ]
         },
+
         series: [{
           name: '浙江省 vs 杭州市 vs 本站点',
           type: 'radar',
