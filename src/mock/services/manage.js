@@ -16,9 +16,41 @@ const serverList = (options) => {
   for (let i = 1; i < next; i++) {
     const tmpKey = key + i
     const tmpKey1 = Math.floor(Math.random() * 6) + 1
+
+    // 原始序号
+    const baseSerial = '3301050012303150000'
+
+    // 将 baseSerial 拆分为数组形式进行加法（模拟大数字加法）
+    const serialArray = baseSerial.split('')
+    let carry = i // 需要加上的数字部分
+
+    // 从最后一位开始进行加法
+    for (let j = serialArray.length - 1; j >= 0; j--) {
+      const currentDigit = parseInt(serialArray[j]) // 当前位的数字
+      const sum = currentDigit + carry // 当前位与要加上的数相加
+
+      if (sum >= 10) {
+        serialArray[j] = (sum % 10).toString() // 当前位的结果
+        carry = Math.floor(sum / 10) // 进位
+      } else {
+        serialArray[j] = sum.toString() // 如果没有进位，直接赋值
+        carry = 0 // 结束加法
+        break
+      }
+    }
+
+    // 如果最后还有进位，需要在数组前面添加进位
+    if (carry > 0) {
+      serialArray.unshift(carry.toString())
+    }
+
+    // 拼接数组得到最终的 serial 值
+    const serial = serialArray.join('')
+
     result.push({
       key: tmpKey,
       id: tmpKey,
+      serial: serial, // 使用模拟加法后的 serial
       no: '危险物品 ' + tmpKey1,
       description: '杭州文海南路口01站点',
       callNo: Mock.mock('@integer(1, 999)'),

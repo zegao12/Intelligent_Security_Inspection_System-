@@ -97,9 +97,6 @@
         :rowSelection="rowSelection"
         showPagination="auto"
       >
-        <span slot="serial" slot-scope="text, record, index">
-          {{ 3301050012303150001 + index }}
-        </span>
         <span slot="status" slot-scope="text">
           <a-badge :status="text | statusTypeFilter" :text="text | statusFilter" />
         </span>
@@ -139,6 +136,7 @@ import CreateForm from './modules/CreateForm'
 const columns = [
   {
     title: '序号',
+    dataIndex: 'serial',
     scopedSlots: { customRender: 'serial' }
   },
   {
