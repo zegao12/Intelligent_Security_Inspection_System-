@@ -2,7 +2,7 @@
   <div>
     <a-row :gutter="24">
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" :title="$t('dashboard.analysis.total-sales')" total="￥126,560">
+        <chart-card :loading="loading" :title="$t('dashboard.analysis.total-sales')" total="126,560件">
           <a-tooltip :title="$t('dashboard.analysis.introduce')" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
@@ -16,7 +16,7 @@
               11%
             </trend>
           </div>
-          <template slot="footer">{{ $t('dashboard.analysis.day-sales') }}<span>￥ 234.56</span></template>
+          <template slot="footer">{{ $t('dashboard.analysis.day-sales') }}<span>1234件</span></template>
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
@@ -42,7 +42,7 @@
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" :title="$t('dashboard.analysis.operational-effect')" total="78%">
+        <chart-card :loading="loading" :title="$t('dashboard.analysis.operational-effect')" total="预计排队3分钟">
           <a-tooltip :title="$t('dashboard.analysis.introduce')" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
@@ -62,7 +62,21 @@
         </chart-card>
       </a-col>
     </a-row>
-
+    <a-row :gutter="24">
+      <a-col :sm="48" :md="24" :xl="12" :style="{ marginBottom: '24px' }">
+        <chart-card :loading="loading" :title="$t('dashboard.analysis.s1')" >
+        </chart-card>
+      </a-col>
+      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
+        <chart-card :loading="loading" :title="$t('dashboard.analysis.s2')" >
+            <img src="https://www.bing.com/images/search?view=detailV2&ccid=kuRobogR&id=7C1A5A6909B0A3DAAF5EC6A777FBBFA935785991&thid=OIP.kuRobogR_ZSqW2JfyE8ysgHaEs&mediaurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.92e4686e8811fd94aa5b625fc84f32b2%3frik%3dkVl4Nam%252f%252b3enxg%26riu%3dhttp%253a%252f%252fwww.bjfuacm.com%252fstatic%252fimg%252facm_logo.png%26ehk%3dShknKkNzBcduoOQIR3husdnjGPvGl7NYh6%252bK1BvEAKQ%253d%26risl%3d%26pid%3dImgRaw%26r%3d0&exph=3321&expw=5243&q=acm&simid=608040093071464324&FORM=IRPRST&ck=E713B7BB03B140EB84A9E6884881A799&selectedIndex=4&itb=1" alt="123">
+        </chart-card>
+      </a-col>
+      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
+        <chart-card :loading="loading" :title="$t('dashboard.analysis.s3')">
+        </chart-card>
+      </a-col>
+    </a-row>
     <a-card :loading="loading" :bordered="false" :body-style="{padding: '0'}">
       <div class="salesCard">
         <a-tabs default-active-key="1" size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
