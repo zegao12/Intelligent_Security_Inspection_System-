@@ -20,7 +20,7 @@
               </a-form-item>
             </a-col>
             <a-col :md="8" :sm="24">
-              <a-form-item label="危险等级">
+              <a-form-item label="可疑等级">
                 <a-select v-model="queryParam.status" placeholder="请选择" default-value="0">
                   <a-select-option value="0">高危</a-select-option>
                   <a-select-option value="1">中危</a-select-option>
@@ -50,7 +50,7 @@
                 </a-form-item>
               </a-col>
               <a-col :md="8" :sm="24">
-                <a-form-item label="危险物品类别">
+                <a-form-item label="可疑物品类别">
                   <a-select placeholder="请选择" default-value="0">
                     <a-select-option value="0">全部</a-select-option>
                     <a-select-option value="1">关闭</a-select-option>
@@ -97,9 +97,6 @@
         :rowSelection="rowSelection"
         showPagination="auto"
       >
-        <span slot="serial" slot-scope="text, record, index">
-          {{ 3301050012303150001 + index }}
-        </span>
         <span slot="status" slot-scope="text">
           <a-badge :status="text | statusTypeFilter" :text="text | statusFilter" />
         </span>
@@ -139,14 +136,15 @@
   const columns = [
     {
       title: '序号',
+      dataIndex: 'serial',
       scopedSlots: { customRender: 'serial' }
     },
     {
-      title: '危险物品类别',
-      dataIndex: 'no'
+      title: '可疑物品类别',
+      dataIndex: 'no1'
     },
     {
-      title: '危险物品等级',
+      title: '可疑物品等级',
       dataIndex: 'status',
       scopedSlots: { customRender: 'status' }
     },

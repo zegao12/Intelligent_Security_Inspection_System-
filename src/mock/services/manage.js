@@ -52,6 +52,7 @@ const serverList = (options) => {
       id: tmpKey,
       serial: serial, // 使用模拟加法后的 serial
       no: '危险物品 ' + tmpKey1,
+      no1: '可疑物品 ' + tmpKey1,
       description: '杭州文海南路口01站点',
       callNo: Mock.mock('@integer(1, 999)'),
       status: Mock.mock('@integer(0, 3)'),
