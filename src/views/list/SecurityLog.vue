@@ -6,17 +6,7 @@
           <a-row :gutter="48">
             <a-col :md="8" :sm="24">
               <a-form-item label="起始日期">
-                <a-input
-                  placeholder="开始日期"
-                  style="width: 120px;"
-                  v-decorator="['startDate', { initialValue: '' }]"
-                />
-                <span style="margin: 0 5px;">~</span>
-                <a-input
-                  placeholder="结束日期"
-                  style="width: 120px;"
-                  v-decorator="['endDate', { initialValue: '' }]"
-                />
+                <a-range-picker :style="{width: '256px'}" />
               </a-form-item>
             </a-col>
             <a-col :md="8" :sm="24">
