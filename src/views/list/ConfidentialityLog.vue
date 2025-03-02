@@ -6,7 +6,7 @@
           <a-row :gutter="48">
             <a-col :md="8" :sm="24">
               <a-form-item label="起始日期">
-                  <a-range-picker :style="{width: '256px'}" />
+                <a-range-picker :style="{width: '256px'}" />
               </a-form-item>
             </a-col>
             <a-col :md="8" :sm="24">

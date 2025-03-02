@@ -199,10 +199,10 @@
                 </a-dropdown>
               </span>
               <div class="analysis-salesTypeRadio">
-                <a-radio-group defaultValue="a" size="small" style="align-self: center;">
-                  <a-radio-button value="a">{{ $t('dashboard.analysis.channel.all') }}</a-radio-button>
-                  <a-radio-button value="b">{{ $t('dashboard.analysis.channel.online') }}</a-radio-button>
-                  <a-radio-button value="c">{{ $t('dashboard.analysis.channel.stores') }}</a-radio-button>
+                <a-radio-group defaultValue="a"  style="align-self: center;" size="small">
+                  <a-radio-button value="a" >{{ $t('dashboard.analysis.channel.all') }}</a-radio-button>
+                  <a-radio-button value="b" >{{ $t('dashboard.analysis.channel.online') }}</a-radio-button>
+                  <a-radio-button value="c" >{{ $t('dashboard.analysis.channel.stores') }}</a-radio-button>
                 </a-radio-group>
               </div>
             </div>
@@ -500,7 +500,8 @@ export default {
 
 .analysis-salesTypeRadio {
   position: absolute;
-  right: 54px;
-  bottom: 12px;
+  left:130px;
+  bottom: 16px;
+  align-self: center;
 }
 </style>
