@@ -167,16 +167,16 @@
         <!-- 第二列 -->
         <a-col :sm="24" :md="12" :xl="6" style="display: flex; flex-direction: column; height: 100%">
           <a-card
-            class="antd-pro-pages-dashboard-analysis-salesCard"
-            :bordered="false"
             title="安检指数"
-            :style="{ flex: 1, height: '100%' }"
+            style="margin-bottom: 24px;font-weight: 100;"
+            :loading="radarLoading"
+            :bordered="false"
+            :body-style="{ padding: 0 }"
           >
-            <div
-              ref="cardContainer"
-              style="min-height: 400px; display: flex; justify-content: center; align-items: center; width: 100%; flex: 1;"
-            >
-              <div ref="radarChart" style="width: 80%; height: 400px;"></div>
+            <div style="min-height: 400px;font-family:'Microsoft YaHei';">
+              <h4 style="margin: 20px;">{{ $t('dashboard.analysis.s5') }}</h4>
+              <!-- :scale="scale" :axis1Opts="axis1Opts" :axis2Opts="axis2Opts"  -->
+              <radar :data="radarData" />
             </div>
           </a-card>
         </a-col>
@@ -199,7 +199,7 @@
                 </a-dropdown>
               </span>
               <div class="analysis-salesTypeRadio">
-                <a-radio-group defaultValue="a"  style="align-self: center;" size="small">
+                <a-radio-group defaultValue="a" style="align-self: center;" size="small">
                   <a-radio-button value="a" >{{ $t('dashboard.analysis.channel.all') }}</a-radio-button>
                   <a-radio-button value="b" >{{ $t('dashboard.analysis.channel.online') }}</a-radio-button>
                   <a-radio-button value="c" >{{ $t('dashboard.analysis.channel.stores') }}</a-radio-button>
@@ -236,7 +236,8 @@
 
 <script>
 import moment from 'moment'
-import * as echarts from 'echarts'
+
+// import * as echarts from 'echarts'
 import {
   ChartCard,
   MiniArea,
@@ -246,7 +247,8 @@ import {
   Bar,
   Trend,
   NumberInfo,
-  MiniSmoothArea
+  MiniSmoothArea,
+  Radar
 } from '@/components'
 import { baseMixin } from '@/store/app-mixin'
 
@@ -338,6 +340,7 @@ export default {
     MiniBar,
     MiniProgress,
     RankList,
+    Radar,
     Bar,
     Trend,
     NumberInfo,
@@ -347,12 +350,12 @@ export default {
     return {
       loading: true,
       rankList,
-
+      radarLoading: true,
       // 搜索用户数
       searchUserData,
       searchUserScale,
       searchData,
-
+      radarData: [],
       barData,
       barData2,
 
@@ -393,7 +396,7 @@ export default {
     }
   },
   mounted () {
-    this.initRadarChart()
+    this.initRadar()
     this.handleResize()// 初次加载时调整大小
     window.addEventListener('resize', this.handleResize) // 添加resize事件监听
   },
@@ -409,49 +412,29 @@ export default {
       const chartWidth = Math.min(containerWidth * 0.8, 600) // 设置最大宽度
       radarChart.style.width = `${chartWidth}px` // 根据卡片宽度调整图表宽度
     },
-    initRadarChart () {
-      const radarChart = echarts.init(this.$refs.radarChart)
-      const option = {
-        title: {
-        },
-        tooltip: {},
-        legend: {
-           x: 'center',
-          y: 'bottom',
-          data: ['浙江省', '杭州市', '本站点']
-        },
-        radar: {
-          indicator: [
-            { name: '客流量', max: 100 },
-            { name: '高危物品', max: 100 },
-            { name: '安检负载', max: 100 },
-            { name: '检出度', max: 100 },
-            { name: '排队时间', max: 100 },
-            { name: '峰谷流量', max: 100 }
-          ]
-        },
+    initRadar () {
+  this.radarLoading = true
 
-        series: [{
-          name: '浙江省 vs 杭州市 vs 本站点',
-          type: 'radar',
-          data: [
-            {
-              value: [70, 60, 50, 40, 60, 70],
-              name: '浙江省'
-            },
-            {
-              value: [30, 70, 60, 50, 70, 50],
-              name: '杭州市'
-            },
-            {
-              value: [40, 40, 40, 40, 40, 40],
-              name: '本站点'
-            }
-          ]
-        }]
-      }
-      radarChart.setOption(option)
+  this.$http.get('/workplace/radar').then(res => {
+    if (res.result && res.result.length > 0) { // 确保有数据
+      const dv = new DataSet.View().source(res.result)
+      dv.transform({
+        type: 'fold',
+        fields: ['个人', '团队', '部门'], // 确保你的字段正确
+        key: 'user',
+        value: 'score'
+      })
+      this.radarData = dv.rows
+    } else {
+      console.warn('雷达数据为空:', res)
     }
+    this.radarLoading = false
+  }).catch(err => {
+    console.error('获取雷达数据失败:', err)
+    this.radarLoading = false
+  })
+}
+
   },
   created () {
     setTimeout(() => {

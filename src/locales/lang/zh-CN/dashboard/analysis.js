@@ -32,6 +32,7 @@ export default {
   'dashboard.analysis.channel.online': '杭州市',
   'dashboard.analysis.channel.stores': '本站点',
   'dashboard.analysis.sales': '危险物品检出次数',
+  'dashboard.analysis.s5': '根据上周数据统计',
   'dashboard.analysis.traffic': '客流量',
   'dashboard.analysis.table.rank': '排名',
   'dashboard.analysis.table.search-keyword': '物品名称',
